@@ -4,3 +4,4 @@ restaurant_id.txt
 .idea/
 .ipynb_checkpoints/
 data/
+*.pyc
