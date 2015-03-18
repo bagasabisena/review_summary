@@ -19,15 +19,12 @@ def search():
     query = request.args.get('q', '')
     body = """
 {
-        "query": {
-            "match": {
-                "name": {
-                    query: "%s",
-                    fuzziness: "AUTO",
-                    analyzer: "simple"
-                }
-            }
+    "query" : {
+        "match": {"tips.text":
+            {"query": "%s", "fuzziness": "auto"}
+
         }
+    }
 }
 """ % (query,)
     returned_query = es.search(index='4sreviews', doc_type='venues',
