@@ -5,3 +5,8 @@ restaurant_id.txt
 .ipynb_checkpoints/
 data/
 *.pyc
+db/
+culture_search/
+database/
+web/
+database*
