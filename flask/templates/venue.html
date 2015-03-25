@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+{% if venue %}
+<h1>{{ venue._source.name }}</h1>
+<h2>{{ "%s, %s" % (venue._source.location.city, venue._source.location.country) }}</h2>
+
+{% for tip in venue._source.tips %}
+<div class='row'>
+  <div class='col-md-2'>
+    <a href={{ 'http://www.foursquare.com/user/' + tip.user.id }}>
+      <img src={{ tip.user.photo.prefix + '64x64' + tip.user.photo.suffix }} />
+    </a>
+    <p>{{ tip.user.firstname }}</p>
+  </div>
+
+  <div class='col-md-10'>
+    <p>{{ tip.text }}</p>
+  </div>
+</div>
+{% endfor %}
+
+
+{% endif %}
+{% endblock %}
