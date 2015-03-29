@@ -1,11 +1,27 @@
 from flask import Flask, render_template, request
+from flaskext.mysql import MySQL
 import elasticsearch
 app = Flask(__name__)
 
 
+mysql=MySQL()
+app=Flask(__name__)
+app.config['MYSQL_DATABASE_USER']='root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'Pollikan290592'
+app.config['MYSQL_DATABASE_DB'] = '4sreviews'
+app.config['MYSQL_DATABASE_HOST'] = 'www.pollican.com'
+mysql.init_app(app)
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    cursor=mysql.connect().cursor()
+    cursor.execute("select distinct(region) from users")
+    rows = cursor.fetchall()
+
+    for row in rows:
+        row="%s" %row
+        print row
+    return render_template('index.html',rows=rows)
 
 
 @app.route('/search')
@@ -59,6 +75,10 @@ def search():
 def venue(venue_id):
     es = elasticsearch.Elasticsearch()
     venue = es.get(index='4sreviews', doc_type='venues', id=venue_id)
+    cursor=mysql.connect().cursor()
+    cursor.execute("select user_id,ph from venues where venue_id='"+venue_id+"'")
+    data=cursor.fetchone()
+    print data
     return render_template('venue.html', venue=venue)
 
 

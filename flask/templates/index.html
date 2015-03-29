@@ -3,13 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Search</title>
+
 <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/cufon-yui.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/cufon-yui.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/Abraham_Lincoln_400.font.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/Inspiration_400.font.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/Museo_Slab_100_400-Museo_Slab_700_400.font.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
 <script type="text/javascript">
   Cufon.replace('.logo h1', {fontFamily: 'Inspiration'});
   Cufon.replace('.logo h2', {fontFamily: 'Museo Slab 100'});
@@ -28,8 +31,18 @@
     <p class="big_text"><strong>Search</strong></p>
     <div class="form">
       <div class="field_content">
-        <form action='/search' method='GET'>
-          <input class="field" type="text" name='q'/>
+        <form action='/search' method='GET' class='container-fluid'>
+        <div class='row'>
+          <input class="field col-lg-6" type="text" name='q'/>
+          <select class="form-control col-lg-6" name='region'>
+            {% for row in rows %}
+            <option>
+            {{"%s" %row}}
+              
+            </option>
+            {% endfor %}
+          </select>
+          </div>
           <button class="submit" type="submit" value="" />
         </form>
       </div>

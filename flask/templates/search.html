@@ -14,11 +14,14 @@
     <div class='col-md-8'>
       {% for result in results %}
       <a href={{ url_for('venue', venue_id=result._id) }}><h2>{{ result._source.name }}</h2></a>
-      <h3>{{ "%s, %s" % (result._source.location.city, result._source.location.country) }}
+      <h3>{{ "%s, %s" % (result._source.location.city, result._source.location.country) }}</h3>
       {% endfor %}
     </div>
     <div class='col-md-4'>Semantic Search</div>
   </div>
+  <script type="text/javascript">
+  console.log("{{results}}")
+  </script>
 </body>
 
 </html>
